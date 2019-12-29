@@ -58,35 +58,33 @@ class MonthDay(ttk.Frame):
         m.theme_use('alt')
         m.configure('my.TLabel', font=('Helvetica', '21', 'bold'), anchor='se', background='white', borderwidth='1', relief='ridge')
 
-        self.__monthDay = ttk.Label(self, text=self.cadenaDia, foreground='black', style='my.TLabel', padding=4)
-        self.__monthDay.pack(side=TOP, fill=BOTH, expand=True)
+        self.monthDay = ttk.Label(self, text=self.cadenaDia, style='my.TLabel', padding=4)
+        self.monthDay.pack(side=TOP, fill=BOTH, expand=True)
     
     def valor(self, texto, color):
         self.cadenaDia = texto
         if color in ('red', 'black'):
             labelDia = self.cadenaDia.day
-            self.__monthDay.config(text=labelDia, foreground=color)
-            self.__monthDay.bind("<Button-1>", self.selectDate)
+            self.monthDay.config(text=labelDia, foreground=color)
         if color in ('grey'):
-            self.__monthDay.config(text=self.cadenaDia, foreground=color)
+            self.monthDay.config(text=self.cadenaDia, foreground=color)
+        
+        self.monthDay.bind("<Button-1>", self.selectDate)
+
 
     def selectDate(self, event):
-        self.__monthDay.config(foreground='blue')
+        if isinstance(self.cadenaDia, date):
+            self.monthDay.config(foreground='blue')
 
 '''
-    def newWindow(self, texto):
-        window = Toplevel()
-        window.title('Fecha Elegida')
-        window.geometry("{}x{}".format(WIDTHBTN*4, HEIGHTBTN*2))
-        hoy = self.cadenaDia
         texto = str(hoy.day) + ' de ' + (hoy.strftime("%B")).title() + ' de ' + str(hoy.year)
-        etiqueta = ttk.Label(window, text=texto, font='Helvetica 11', anchor='center', background='white', foreground='black', borderwidth='1', relief='groove', padding=3)
-        etiqueta.place(x=40, y=15)
+
 '''
 
 class Calendar(ttk.Frame):
     listDays = []
     hoy = date.today()
+    hoy = hoy.replace(day=1)
     def __createCalendar(self):
         layoutCalendar = ttk.Frame(self, name='layoutCalendar')
 
