@@ -12,9 +12,16 @@ class ControlWindow(Tk):
         self.btn.place(x=40, y=20)
         self.etiqueta = ttk.Label(self, text='', font='Helvetica 11', anchor='center', width=20, background='white', foreground='black', borderwidth='1', relief='groove', padding=3)
         self.etiqueta.place(x=40, y=50)
+        #self.btn.bind("<Button-1>", self.inhabilitar)
+
 
     def start(self):
         self.mainloop()
+
+    
+    def inhabilitar(self, event):
+        self.btn.config(state=DISABLED)
+
 
 
 class CalendarWindow(Toplevel):
@@ -25,7 +32,8 @@ class CalendarWindow(Toplevel):
         self.geometry("{}x{}+360+25".format(WIDTHBTN*7, HEIGHTBTN*7))
         
         c = Calendar(self)
-        c.pack() 
+        c.pack()
+
 
 
 if __name__ == '__main__':

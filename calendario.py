@@ -68,18 +68,15 @@ class MonthDay(ttk.Frame):
             self.monthDay.config(text=labelDia, foreground=color)
         if color in ('grey'):
             self.monthDay.config(text=self.cadenaDia, foreground=color)
-        
+       
         self.monthDay.bind("<Button-1>", self.selectDate)
 
 
     def selectDate(self, event):
         if isinstance(self.cadenaDia, date):
             self.monthDay.config(foreground='blue')
+            print(str(self.cadenaDia.day) + ' de ' + (self.cadenaDia.strftime("%B")).title() + ' de ' + str(self.cadenaDia.year))
 
-'''
-        texto = str(hoy.day) + ' de ' + (hoy.strftime("%B")).title() + ' de ' + str(hoy.year)
-
-'''
 
 class Calendar(ttk.Frame):
     listDays = []
