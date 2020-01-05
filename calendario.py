@@ -66,16 +66,33 @@ class MonthDay(ttk.Frame):
         if color in ('red', 'black'):
             labelDia = self.cadenaDia.day
             self.monthDay.config(text=labelDia, foreground=color)
+            self.monthDay.bind("<Button-1>", self.changeColor)
         if color in ('grey'):
             self.monthDay.config(text=self.cadenaDia, foreground=color)
        
-        self.monthDay.bind("<Button-1>", self.selectDate)
+    def changeColor(self, event):
+        try:
+            if isinstance(self.cadenaDia, date):
+                self.monthDay.config(foreground='blue')
+                self.asignaFx(self.cadenaDia)
+        except:
+            return None
+
+    def asignaFx(self, texto):
+        fechaElegida = str(self.cadenaDia.day) + ' de ' + (self.cadenaDia.strftime("%B")).title() + ' de ' + str(self.cadenaDia.year)
+        print(fechaElegida)
 
 
-    def selectDate(self, event):
-        if isinstance(self.cadenaDia, date):
-            self.monthDay.config(foreground='blue')
-            print(str(self.cadenaDia.day) + ' de ' + (self.cadenaDia.strftime("%B")).title() + ' de ' + str(self.cadenaDia.year))
+class Display(ttk.Frame):
+    def __init__(self, parent):
+        ttk.Frame.__init__(self, parent, width=7*WIDTHBTN, height=HEIGHTBTN)
+
+        self.pack_propagate(0)
+
+        fechaElegida = str(date.today().day) + ' de ' + (date.today().strftime("%B")).title() + ' de ' + str(date.today().year)
+
+        self.date = ttk.Label(self, text=fechaElegida, font='Helvetica 12', anchor='center', background='white', foreground='black', borderwidth='1', relief='ridge')
+        self.date.pack(side=TOP, fill=BOTH, expand=True)
 
 
 class Calendar(ttk.Frame):
@@ -85,175 +102,14 @@ class Calendar(ttk.Frame):
     def __createCalendar(self):
         layoutCalendar = ttk.Frame(self, name='layoutCalendar')
 
-        self.Day0 = MonthDay(self)
-        self.Day0.grid(column=0, row=2)
-        self.listDays.append(self.Day0)
-
-        self.Day1 = MonthDay(self)
-        self.Day1.grid(column=1, row=2)
-        self.listDays.append(self.Day1)
-
-        self.Day2 = MonthDay(self)
-        self.Day2.grid(column=2, row=2)
-        self.listDays.append(self.Day2)
-
-        self.Day3 = MonthDay(self)
-        self.Day3.grid(column=3, row=2)
-        self.listDays.append(self.Day3)
-
-        self.Day4 = MonthDay(self)
-        self.Day4.grid(column=4, row=2)
-        self.listDays.append(self.Day4)
-
-        self.Day5 = MonthDay(self)
-        self.Day5.grid(column=5, row=2)
-        self.listDays.append(self.Day5)
-
-        self.Day6 = MonthDay(self)
-        self.Day6.grid(column=6, row=2)
-        self.listDays.append(self.Day6)
-
-        self.Day7 = MonthDay(self)
-        self.Day7.grid(column=0, row=3)
-        self.listDays.append(self.Day7)
-
-        self.Day8 = MonthDay(self)
-        self.Day8.grid(column=1, row=3)
-        self.listDays.append(self.Day8)
-
-        self.Day9 = MonthDay(self)
-        self.Day9.grid(column=2, row=3)
-        self.listDays.append(self.Day9)
-
-        self.Day10 = MonthDay(self)
-        self.Day10.grid(column=3, row=3)
-        self.listDays.append(self.Day10)
-        
-        self.Day11 = MonthDay(self)
-        self.Day11.grid(column=4, row=3)
-        self.listDays.append(self.Day11)
-
-        self.Day12 = MonthDay(self)
-        self.Day12.grid(column=5, row=3)
-        self.listDays.append(self.Day12)
-
-        self.Day13 = MonthDay(self)
-        self.Day13.grid(column=6, row=3)
-        self.listDays.append(self.Day13)
-
-        self.Day14 = MonthDay(self)
-        self.Day14.grid(column=0, row=4)
-        self.listDays.append(self.Day14)
-
-        self.Day15 = MonthDay(self)
-        self.Day15.grid(column=1, row=4)
-        self.listDays.append(self.Day15)
-
-        self.Day16 = MonthDay(self)
-        self.Day16.grid(column=2, row=4)
-        self.listDays.append(self.Day16)
-
-        self.Day17 = MonthDay(self)
-        self.Day17.grid(column=3, row=4)
-        self.listDays.append(self.Day17)
-
-        self.Day18 = MonthDay(self)
-        self.Day18.grid(column=4, row=4)
-        self.listDays.append(self.Day18)
-
-        self.Day19 = MonthDay(self)
-        self.Day19.grid(column=5, row=4)
-        self.listDays.append(self.Day19)
-
-        self.Day20 = MonthDay(self)
-        self.Day20.grid(column=6, row=4)
-        self.listDays.append(self.Day20)
-
-        self.Day21 = MonthDay(self)
-        self.Day21.grid(column=0, row=5)
-        self.listDays.append(self.Day21)
-
-        self.Day22 = MonthDay(self)
-        self.Day22.grid(column=1, row=5)
-        self.listDays.append(self.Day22)
-
-        self.Day23 = MonthDay(self)
-        self.Day23.grid(column=2, row=5)
-        self.listDays.append(self.Day23)
-
-        self.Day24 = MonthDay(self)
-        self.Day24.grid(column=3, row=5)
-        self.listDays.append(self.Day24)
-
-        self.Day25 = MonthDay(self)
-        self.Day25.grid(column=4, row=5)
-        self.listDays.append(self.Day25)
-
-        self.Day26 = MonthDay(self)
-        self.Day26.grid(column=5, row=5)
-        self.listDays.append(self.Day26)
-
-        self.Day27 = MonthDay(self)
-        self.Day27.grid(column=6, row=5)
-        self.listDays.append(self.Day27)
-
-        self.Day28 = MonthDay(self)
-        self.Day28.grid(column=0, row=6)
-        self.listDays.append(self.Day28)
-
-        self.Day29 = MonthDay(self)
-        self.Day29.grid(column=1, row=6)
-        self.listDays.append(self.Day29)
-
-        self.Day30 = MonthDay(self)
-        self.Day30.grid(column=2, row=6)
-        self.listDays.append(self.Day30)
-
-        self.Day31 = MonthDay(self)
-        self.Day31.grid(column=3, row=6)
-        self.listDays.append(self.Day31)
-
-        self.Day32 = MonthDay(self)
-        self.Day32.grid(column=4, row=6)
-        self.listDays.append(self.Day32)
-
-        self.Day33 = MonthDay(self)
-        self.Day33.grid(column=5, row=6)
-        self.listDays.append(self.Day33)
-
-        self.Day34 = MonthDay(self)
-        self.Day34.grid(column=6, row=6)
-        self.listDays.append(self.Day34)
-
-        self.Day35 = MonthDay(self)
-        self.Day35.grid(column=0, row=7)
-        self.listDays.append(self.Day35)
-
-        self.Day36 = MonthDay(self)
-        self.Day36.grid(column=1, row=7)
-        self.listDays.append(self.Day36)
-
-        self.Day37 = MonthDay(self)
-        self.Day37.grid(column=2, row=7)
-        self.listDays.append(self.Day37)
-
-        self.Day38 = MonthDay(self)
-        self.Day38.grid(column=3, row=7)
-        self.listDays.append(self.Day38)
-
-        self.Day39 = MonthDay(self)
-        self.Day39.grid(column=4, row=7)
-        self.listDays.append(self.Day39)
-
-        self.Day40 = MonthDay(self)
-        self.Day40.grid(column=5, row=7)
-        self.listDays.append(self.Day40)
-
-        self.Day41 = MonthDay(self)
-        self.Day41.grid(column=6, row=7)
-        self.listDays.append(self.Day41)
+        for rowMonth in range(2, 8):
+            for columnMonth in range(0, 7):
+                self.day = MonthDay(self)
+                self.day.grid(row=rowMonth, column=columnMonth)
+                self.listDays.append(self.day)
 
         return layoutCalendar
+
 
     def __init__(self, parent):
         ttk.Frame.__init__(self, parent)
@@ -280,6 +136,9 @@ class Calendar(ttk.Frame):
         self.layoutCalendar = self.__createCalendar()
         self.generaCalendar(self.hoy)
 
+        self.fxBox = Display(self)
+        self.fxBox.grid(column=0, row=8, columnspan=7)
+
 
     def generaCalendar(self, hoy):
         mes = self.hoy.month
@@ -300,20 +159,20 @@ class Calendar(ttk.Frame):
             indMesAnt -= 1
 
         for diaMesAct in range(1, diasMesAct+1):
-            diaCalendar = self.hoy.replace(day=diaMesAct)
+            self.diaCalendar = self.hoy.replace(day=diaMesAct)
             if indMesAct in (5,6,12,13,19,20,26,27,33,34,40,41):
-                self.listDays[indMesAct].valor(diaCalendar, 'red')
+                self.listDays[indMesAct].valor(self.diaCalendar, 'red')
             else:
-                self.listDays[indMesAct].valor(diaCalendar, 'black')
+                self.listDays[indMesAct].valor(self.diaCalendar, 'black')
             indMesAct += 1
-        
+
         diaMesNew = 1
         while indMesAct < 42:
             self.listDays[indMesAct].valor(diaMesNew, 'grey')
             diaMesNew += 1
             indMesAct += 1
-                   
-    
+
+
     def rellenaCab(self, hoy):
         return (hoy.strftime("%B")).title() + ' ' + str(hoy.year)
 
