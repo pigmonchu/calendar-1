@@ -49,12 +49,11 @@ class WeekDay(ttk.Frame):
 class MonthDay(ttk.Frame):
     cadenaDia = ''
 
-    def __init__(self, parent, onclic):
+    def __init__(self, parent, onclic): #<-- Nuevo parámetro de construcción onclic. La función de línea 56
         ttk.Frame.__init__(self, parent, width=WIDTHBTN, height=HEIGHTBTN)
 
         self.pack_propagate(0)
-        self.onClic = onclic
-
+        self.onClic = onclic #<-- nuevo atributo. Función con firma (self, valor:string) que será llamada al hacer clic sobre el número.
 
         m = ttk.Style()
         m.theme_use('alt')
@@ -77,7 +76,7 @@ class MonthDay(ttk.Frame):
             if isinstance(self.cadenaDia, date):
                 self.monthDay.config(foreground='blue')
                 fechaElegida = str(self.cadenaDia.day) + ' de ' + (self.cadenaDia.strftime("%B")).title() + ' de ' + str(self.cadenaDia.year)
-                self.onClic(fechaElegida)
+                self.onClic(fechaElegida) #<-- Se invoca onClic (es decir, el método informado en la creación, como el command de Button)
         except:
             return None
 
@@ -106,7 +105,7 @@ class Calendar(ttk.Frame):
 
         for rowMonth in range(2, 8):
             for columnMonth in range(0, 7):
-                self.day = MonthDay(self, self.informaDia)
+                self.day = MonthDay(self, self.informaDia) #<-- Creación de MonthDay informando que hacer cuando se haga clic en el
                 self.day.grid(row=rowMonth, column=columnMonth)
                 self.listDays.append(self.day)
 
@@ -234,6 +233,6 @@ class Calendar(ttk.Frame):
             self.cabecera.valor(newCab)
             self.generaCalendar(self.hoy)
 
-    def informaDia(self, valor):
+    def informaDia(self, valor): #<-- Método de calendar que relaciona MonthDay con Display. Ya que Calendar controla tanto MonthdDay como Display
         print(valor)
         self.fxBox.date.config(text = valor)
